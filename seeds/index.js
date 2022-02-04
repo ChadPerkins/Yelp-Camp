@@ -32,12 +32,13 @@ const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
     await Campground.deleteMany({});
-    // Changed from 50 to 3 since the unsplash api limits 50/h.
+    // Changed from 50 to 10 since the unsplash api limits 50/h.
     // Change back to 50 after development
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 10; i++) {
         const randNum = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
+            author: '61fd764abf36693869885953',
             image: await seedImg(),
             title: `${sample(descriptors)} ${sample(places)}`,
             location: `${cities[randNum].city}, ${cities[randNum].state}`,
