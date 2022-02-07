@@ -13,21 +13,6 @@ db.once('open', () =>{
     console.log("Database connected");
 });
 
-// call unsplash and return small image
-async function seedImg() {
-    try {
-        const resp = await axios.get('https://api.unsplash.com/photos/random', {
-            params: {
-                client_id: 'i-4wA1UtmXfNAYKSOqfEFwv-gInqKtSMgp6iOBdL77E',
-                collections: 1114848
-            }})
-            return resp.data.urls.small
-        }
-    catch (err) {
-        console.error(err)
-    }
-}
-
 const sample = array => array[Math.floor(Math.random() * array.length)];
 
 const seedDB = async () => {
@@ -39,7 +24,20 @@ const seedDB = async () => {
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
             author: '61fd764abf36693869885953',
-            image: await seedImg(),
+            images : [
+                {
+                    url :'https://res.cloudinary.com/dcagbhmvd/image/upload/v1644080888/YelpCamp/ifod1tx7yn2wvvjdtzoz.webp',
+                    filename: "YelpCamp/ifod1tx7yn2wvvjdtzoz"
+                },
+                {
+                    url : 'https://res.cloudinary.com/dcagbhmvd/image/upload/v1644080888/YelpCamp/a80lxczvcqesteaqkbwr.jpg',
+                    filename : "YelpCamp/a80lxczvcqesteaqkbwr"
+                },
+                {
+                    url: 'https://res.cloudinary.com/dcagbhmvd/image/upload/v1644080888/YelpCamp/vosffynbp2ohtmft4xdv.jpg',
+                    filename : "YelpCamp/vosffynbp2ohtmft4xdv"
+            }
+            ],
             title: `${sample(descriptors)} ${sample(places)}`,
             location: `${cities[randNum].city}, ${cities[randNum].state}`,
             description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum quasi ipsum sit. Distinctio vel ut nisi a quisquam ullam quas nulla obcaecati fugit repudiandae? Hic voluptates perferendis accusantium natus a!
