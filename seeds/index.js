@@ -23,6 +23,7 @@ const seedDB = async () => {
         const randNum = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
+            // Your user id
             author: '61fd764abf36693869885953',
             images : [
                 {
@@ -39,6 +40,10 @@ const seedDB = async () => {
             }
             ],
             title: `${sample(descriptors)} ${sample(places)}`,
+            geometry: {
+                type: "Point",
+                coordinates: [-113.1331, 47.0202]
+            },
             location: `${cities[randNum].city}, ${cities[randNum].state}`,
             description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum quasi ipsum sit. Distinctio vel ut nisi a quisquam ullam quas nulla obcaecati fugit repudiandae? Hic voluptates perferendis accusantium natus a!
             Atque, dicta quod? Cum at nostrum accusantium temporibus impedit eaque, nulla consectetur est voluptates reprehenderit ea suscipit porro. Placeat pariatur exercitationem modi ex voluptate tenetur. Quo tenetur corporis fuga eos.
