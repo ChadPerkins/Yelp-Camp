@@ -19,7 +19,7 @@ const seedDB = async () => {
     await Campground.deleteMany({});
     // Changed from 50 to 10 since the unsplash api limits 50/h.
     // Change back to 50 after development
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 400; i++) {
         const randNum = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
@@ -42,7 +42,10 @@ const seedDB = async () => {
             title: `${sample(descriptors)} ${sample(places)}`,
             geometry: {
                 type: "Point",
-                coordinates: [-113.1331, 47.0202]
+                coordinates: [
+                    cities[randNum].longitude,
+                    cities[randNum].latitude
+                ]
             },
             location: `${cities[randNum].city}, ${cities[randNum].state}`,
             description: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum quasi ipsum sit. Distinctio vel ut nisi a quisquam ullam quas nulla obcaecati fugit repudiandae? Hic voluptates perferendis accusantium natus a!
