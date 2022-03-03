@@ -5,7 +5,10 @@ const {places, descriptors} = require('./seedHelpers');
 const cities = require('./cities');
 const Campground = require('../models/campground');
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
+const dbUrl = process.env.DB_URL;
+mongoose.connect(dbUrl);
+
+console.log(dbUrl);
 
 const db = mongoose.connection;
 db.on('error', console.log.bind(console, 'connection error:'));
@@ -19,12 +22,12 @@ const seedDB = async () => {
     await Campground.deleteMany({});
     // Changed from 50 to 10 since the unsplash api limits 50/h.
     // Change back to 50 after development
-    for (let i = 0; i < 400; i++) {
+    for (let i = 0; i < 200; i++) {
         const randNum = Math.floor(Math.random() * 1000);
         const price = Math.floor(Math.random() * 20) + 10;
         const camp = new Campground({
             // Your user id
-            author: '61fd764abf36693869885953',
+            author: '6202cf0aa388d36b7a9f63c0',
             images : [
                 {
                     url :'https://res.cloudinary.com/dcagbhmvd/image/upload/v1644080888/YelpCamp/ifod1tx7yn2wvvjdtzoz.webp',
